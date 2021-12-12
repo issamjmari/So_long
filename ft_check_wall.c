@@ -50,11 +50,23 @@ void	count_cases (int arr_len, char *ret, int darr_len, int i)
 }
 void ft_checkbottom(char *curr, int darr_len)
 {
-	int i;
-	int	arr_len;
+	int 		i;
+	static int	arr_len;
+	static int	stock_len;
 
 	i = 0;
-	arr_len = ft_strlen (curr);
+	if (arr_len == 0)
+	{
+		arr_len = ft_strlen (curr);
+		stock_len = arr_len;
+	}
+	else
+		arr_len = ft_strlen (curr);
+	if (stock_len != arr_len)
+	{
+		printf ("Error\nMap is not rectangular");
+		exit (1);
+	}
 	if (curr[0] != '1' || curr[arr_len - 1] != '1')
 	{
 		printf ("Error\n%s", "Wall incomplete");
@@ -65,7 +77,19 @@ void ft_checkbottom(char *curr, int darr_len)
 void	ft_check_fll (char *first, char *last)
 {
 	int	i;
+	int	j;
 
+	i = 0;
+	j = 0;
+	while (first[i])
+		i++;
+	while (last[j])
+		j++;
+	if (i != j)
+	{
+		printf ("Error\nMap is not rectangular");
+		exit (1);
+	}
 	i = 0;
 	while (first[i] == '1' && last[i] == '1')
 		i++;
