@@ -84,7 +84,7 @@ void	ft_check_wall (char **all_lines, int darr_len)
 
 	i = 1;
 	ft_check_fll (all_lines[0], all_lines[darr_len - 1]);
-	while (i < darr_len - 1)
+	while (i < darr_len)
 	{
 		ft_checkbottom (all_lines[i], darr_len);
 		i++;
