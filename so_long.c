@@ -14,6 +14,11 @@ void so_long (int fd)
 	while (ret)
 	{
 		len++;
+		if (ret[0] == '\n')
+		{
+			printf ("Error\nEmpty line inside the map");
+			exit (1);
+		}
 		temp = ft_strjoin (temp, ret);
 		free (ret);
 		ret = get_next_line (fd);
