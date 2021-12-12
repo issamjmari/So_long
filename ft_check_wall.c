@@ -6,28 +6,29 @@ void	check_cases (int coin, int ex, int player)
 {
 	if (coin == 0)
 	{
-		printf ("There must be at least one collectible");
+		printf ("Error\nThere must be at least one collectible");
 		exit (1);
 	}
 	if (ex == 0)
 	{
-		printf ("There must be at least one exit");
+		printf ("Error\nThere must be at least one exit");
 		exit (1);
 	}
-	if (player > 1)
+	if (player > 1 || player == 0)
 	{
-		printf ("There must be one single player");
+		printf ("Error\nThere must be one single player");
 		exit (1);
 	}
 }
 
-void	count_cases (int len, char *ret, int i)
+void	count_cases (int arr_len, char *ret, int darr_len, int i)
 {
+	static int	line_num;
 	static int	coin;
 	static int	ex;
 	static int	player;
 
-	while (i < (len - 1))
+	while (i < arr_len - 1)
 	{
 		if (ret[i] == 'C')
 			coin++;
@@ -38,57 +39,54 @@ void	count_cases (int len, char *ret, int i)
 		else if (ret[i] != 'C' && ret[i] != 'E' && ret[i] != '0'
 		&& ret[i] != 'P' && ret[i] != '1')
 		{
-			printf ("Error\n%s", "Unknown map char");
+			printf ("Error\n%s", "Unknown char in map");
 			exit (1);
 		}
 		i++;
 	}
-	check_cases (coin, ex, player);
+	if (line_num == darr_len - 2)
+		check_cases (coin, ex, player);
+	line_num++;
 }
-void completecase2(int len, char *ret)
+void ft_checkbottom(char *curr, int darr_len)
 {
 	int i;
+	int	arr_len;
 
-	i = 1;
-	if (ret[0] != '1' || ret[len - 2] != '1')
+	i = 0;
+	arr_len = ft_strlen (curr);
+	if (curr[0] != '1' || curr[arr_len - 1] != '1')
 	{
 		printf ("Error\n%s", "Wall incomplete");
 		exit (1);
 	}
-	count_cases (len, ret, i);
+	count_cases (arr_len, curr, darr_len, i);
 }
-void	completecase1 (int fd, int i, int lines, char *ret)
+void	ft_check_fll (char *first, char *last)
 {
-	int	j;
-	int len;
-	while (i < lines)
-	{
-		j = 0;
-		ret = get_next_line (fd);
-		len = ft_strlen (ret);
-		if (i == 0 || i == lines - 1)
-		{
-			while (ret[j] == '1')
-				j++;
-			if (ret[j] != '\n' && ret[j] != '\0')
-			{
-				printf ("Error\n%s", "Wall incomplete");
-				exit (1);
-			}
-		}
-		else
-			completecase2(len, ret);
+	int	i;
+
+	i = 0;
+	while (first[i] == '1' && last[i] == '1')
 		i++;
+	if ((first[i] != '\n' && first[i] != '\0') 
+	|| (last[i] != '\n' && last[i] != '\0'))
+	{
+		printf ("Error\nWall Incomplete");
+		exit (1);
 	}
 }
 
-void	ft_check_wall (int fd, int lines)
+void	ft_check_wall (char **all_lines, int darr_len)
 {
 	int		j;
 	int		i;
-	char	*ret;
-	int		len;
 
-	i = 0;
-	completecase1 (fd, i, lines, ret);
+	i = 1;
+	ft_check_fll (all_lines[0], all_lines[darr_len - 1]);
+	while (i < darr_len - 1)
+	{
+		ft_checkbottom (all_lines[i], darr_len);
+		i++;
+	}
 }

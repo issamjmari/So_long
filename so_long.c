@@ -4,19 +4,21 @@
 void so_long (int fd)
 {
 	char	*ret;
-	int		lines;
-	int		i;
-	int		j;
+	char	*temp;
+	char	**all_lines;
+	int		len;
 
+	temp = NULL;
+	len = 0;
 	ret = get_next_line (fd);
-	lines = 0;
 	while (ret)
 	{
-		lines++;
+		len++;
+		temp = ft_strjoin (temp, ret);
 		free (ret);
 		ret = get_next_line (fd);
 	}
-	close (fd);
-	fd = open ("test.ber", O_RDONLY);
-	ft_check_wall(fd, lines);
+	all_lines = ft_split(temp, '\n');
+	free (temp);
+	ft_check_wall (all_lines, len);
 }
