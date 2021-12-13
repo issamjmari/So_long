@@ -39,7 +39,7 @@ void	count_cases (int arr_len, char *ret, int darr_len, int i)
 		else if (ret[i] != 'C' && ret[i] != 'E' && ret[i] != '0'
 		&& ret[i] != 'P' && ret[i] != '1')
 		{
-			printf ("Error\n%s", "Unknown char in map");
+			printf ("Error\nUnknown char in map");
 			exit (1);
 		}
 		i++;
@@ -48,7 +48,8 @@ void	count_cases (int arr_len, char *ret, int darr_len, int i)
 		check_cases (coin, ex, player);
 	line_num++;
 }
-void ft_checkbottom(char *curr, int darr_len)
+
+void ft_checkbottom(char *curr, int darr_len, int *width)
 {
 	int 		i;
 	static int	arr_len;
@@ -59,6 +60,7 @@ void ft_checkbottom(char *curr, int darr_len)
 	{
 		arr_len = ft_strlen (curr);
 		stock_len = arr_len;
+		(*width) = arr_len;
 	}
 	else
 		arr_len = ft_strlen (curr);
@@ -74,6 +76,7 @@ void ft_checkbottom(char *curr, int darr_len)
 	}
 	count_cases (arr_len, curr, darr_len, i);
 }
+
 void	ft_check_fll (char *first, char *last)
 {
 	int	i;
@@ -101,16 +104,18 @@ void	ft_check_fll (char *first, char *last)
 	}
 }
 
-void	ft_check_wall (char **all_lines, int darr_len)
+void	ft_check_wall (char **all_lines, int darr_len, int *width)
 {
-	int		j;
 	int		i;
 
 	i = 1;
 	ft_check_fll (all_lines[0], all_lines[darr_len - 1]);
 	while (i < darr_len)
 	{
-		ft_checkbottom (all_lines[i], darr_len);
+		ft_checkbottom (all_lines[i], darr_len, width);
 		i++;
 	}
+	while (--darr_len)
+		free(all_lines[darr_len]);
+	free(all_lines);
 }
