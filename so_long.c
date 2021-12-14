@@ -3,11 +3,20 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-int next_frame (int key, t_img *i)
+int next_frame(int key, t_player *p)
 {
-	
-	if (key == 53)
-		exit (1);
+	static int	move;
+	printf ("%d\n", key);
+
+	if (key == 13)
+		move_up (p);
+	if (key == 0)
+		move_left (p);
+	if (key == 1)
+		move_down (p);
+	if (key == 2)
+		move_right (p);
+	move++;
 	return (0);
 }
 
@@ -37,11 +46,9 @@ char	**get_all_lines (int *height, int fd)
 	return (all_lines);
 }
 
-void	put_elems (char **all_lines, t_img i)
+t_player	put_elems (char **all_lines, t_img i)
 {
-	int y;
-	int x;
-
+	t_player	test;
 	y = 0;
 	while (all_lines[y])
 	{
@@ -57,25 +64,32 @@ void	put_elems (char **all_lines, t_img i)
 			else if (all_lines[y][x] == 'E')
 				ft_draw_elem (x, y, "./door.xpm", i);
 			else if (all_lines[y][x] == 'P')
+			{
 				ft_draw_elem (x, y, "./player.xpm", i);
+				test.posx = x;
+				test.posy = y;
+			}
 			x++;
 		}
 		y++;
 	}
+	return (test);
 }
+
 void so_long (int fd)
 {
-	int		width;
-	int		height;
-	char	**all_lines;
-	t_img	i;
+	int			width;
+	int			height;
+	t_img		i;
+	t_player	p;
 
 	height = 0;
 	all_lines = get_all_lines (&height, fd);
 	ft_check_wall (all_lines, height, &width);
 	i.mlx = mlx_init();
 	i.win = mlx_new_window(i.mlx, (width * 50), (height * 50), "so long");
-	put_elems (all_lines, i);
-	mlx_key_hook(i.win, next_frame, "something");
+	p = put_elems (all_lines, i);
+	p.i = i;
+	mlx_key_hook(i.win, next_frame, &p);
 	mlx_loop (i.mlx);
 }

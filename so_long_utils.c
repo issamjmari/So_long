@@ -8,3 +8,60 @@ void	ft_draw_elem (int x, int y, void *path, t_img i)
 	i.img = mlx_xpm_file_to_image(i.mlx, path, &width, &height);
 	mlx_put_image_to_window (i.mlx, i.win, i.img, x * 50, y * 50);
 }
+void move_left (t_player *p)
+{
+	t_img		i;
+
+	i = p->i;
+	if (all_lines[p->posy][p->posx - 1] == '0')
+	{
+		ft_draw_elem (p->posx, p->posy - 1, "./player.xpm", i);
+		ft_draw_elem (p->posx, p->posy, "./blueone.xpm", i);
+	}
+	if (all_lines[p->posy][p->posx - 1] == 'C')
+		ft_draw_elem (p->posx - 1, p->posy, "./player.xpm", i);
+	p->posx--;
+}
+void move_right (t_player *p)
+{
+	t_img		i;
+
+	i = p->i;
+	if (all_lines[p->posy][p->posx + 1] == '0')
+	{
+		ft_draw_elem (p->posx + 1, p->posy, "./player.xpm", i);
+		ft_draw_elem (p->posx, p->posy, "./blueone.xpm", i);
+	}
+	if (all_lines[p->posy - 1][p->posx] == 'C')
+		ft_draw_elem (p->posx, p->posy + 1, "./player.xpm", i);
+	p->posx++;
+}
+void move_down (t_player *p)
+{
+	t_img		i;
+
+	i = p->i;
+	if (all_lines[p->posy + 1][p->posx] == '0')
+	{
+		ft_draw_elem (p->posx, p->posy + 1, "./player.xpm", i);
+		ft_draw_elem (p->posx, p->posy, "./blueone.xpm", i);
+	}
+	if (all_lines[p->posy + 1][p->posx] == 'C')
+		ft_draw_elem (p->posx, p->posy + 1, "./player.xpm", i);
+	p->posy--;
+}
+
+void move_up (t_player *p)
+{
+	t_img		i;
+
+	i = p->i;
+	if (all_lines[p->posy - 1][p->posx] == '0')
+	{
+		ft_draw_elem (p->posx, p->posy - 1, "./player.xpm", i);
+		ft_draw_elem (p->posx, p->posy, "./blueone.xpm", i);
+	}
+	if (all_lines[p->posy - 1][p->posx] == 'C')
+		ft_draw_elem (p->posx, p->posy - 1, "./player.xpm", i);
+	p->posy++;
+}
