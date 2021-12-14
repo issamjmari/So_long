@@ -5,8 +5,7 @@
 
 int next_frame (int key, t_img *i)
 {
-	int		width1;
-	int		height1;
+	
 	if (key == 53)
 		exit (1);
 	return (0);
@@ -40,14 +39,17 @@ char	**get_all_lines (int *height, int fd)
 
 void	put_elems (char **all_lines, t_img i)
 {
+	int y;
+	int x;
+
 	y = 0;
-	x = 0;
 	while (all_lines[y])
 	{
+		x = 0;
 		while (all_lines[y][x])
 		{
 			if (all_lines[y][x] == '1')
-				ft_draw_elem (x, y, "./wall11.xpm", i);
+				ft_draw_elem (x, y, "./wall.xpm", i);
 			else if (all_lines[y][x] == '0')
 				ft_draw_elem (x, y, "./blueone.xpm", i);
 			else if (all_lines[y][x] == 'C')
@@ -58,7 +60,6 @@ void	put_elems (char **all_lines, t_img i)
 				ft_draw_elem (x, y, "./player.xpm", i);
 			x++;
 		}
-		x = 0;
 		y++;
 	}
 }
