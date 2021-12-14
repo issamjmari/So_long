@@ -19,7 +19,9 @@ void move_left (t_player *p)
 		ft_draw_elem (p->posx - 1, p->posy, "./blueone.xpm", i);
 		ft_draw_elem (p->posx - 1, p->posy, "./player.xpm", i);
 		ft_draw_elem (p->posx, p->posy, "./blueone.xpm", i);
-		p->coin--;
+		if (all_lines[p->posy][p->posx - 1] == 'C')
+			p->coin--;
+		all_lines[p->posy][p->posx - 1] = '0';
 	}
 	else if (all_lines[p->posy][p->posx - 1] == 'E' && p->coin <= 0)
 	{
@@ -27,7 +29,8 @@ void move_left (t_player *p)
 		printf ("YOU WON");
 		exit(1);
 	}
-	else if (all_lines[p->posy][p->posx - 1] == '1')
+	else if (all_lines[p->posy][p->posx - 1] == '1'
+	|| all_lines[p->posy][p->posx - 1] == 'E')
 		return ;
 	p->posx--;
 }
@@ -42,7 +45,9 @@ void move_right (t_player *p)
 		ft_draw_elem (p->posx + 1, p->posy, "./blueone.xpm", i);
 		ft_draw_elem (p->posx + 1, p->posy, "./player.xpm", i);
 		ft_draw_elem (p->posx, p->posy, "./blueone.xpm", i);
-		p->coin--;
+		if (all_lines[p->posy][p->posx + 1] == 'C')
+			p->coin--;
+		all_lines[p->posy][p->posx + 1] = '0';
 	}
 	else if (all_lines[p->posy][p->posx + 1] == 'E' && p->coin <= 0)
 	{
@@ -50,7 +55,8 @@ void move_right (t_player *p)
 		printf ("YOU WON");
 		exit(1);
 	}
-	else if (all_lines[p->posy][p->posx + 1] == '1')
+	else if (all_lines[p->posy][p->posx + 1] == '1'
+	|| all_lines[p->posy][p->posx + 1] == 'E')
 		return ;
 	p->posx++;
 }
@@ -65,7 +71,9 @@ void move_down (t_player *p)
 		ft_draw_elem (p->posx, p->posy + 1, "./blueone.xpm", i);
 		ft_draw_elem (p->posx, p->posy + 1, "./player.xpm", i);
 		ft_draw_elem (p->posx, p->posy, "./blueone.xpm", i);
-		p->coin--;
+		if (all_lines[p->posy + 1][p->posx] == 'C')
+			p->coin--;
+		all_lines[p->posy + 1][p->posx] = '0';
 	}
 	else if (all_lines[p->posy + 1][p->posx] == 'E' && p->coin <= 0)
 	{
@@ -73,7 +81,8 @@ void move_down (t_player *p)
 		printf ("YOU WON");
 		exit(1);
 	}
-	else if (all_lines[p->posy + 1][p->posx] == '1')
+	else if (all_lines[p->posy + 1][p->posx] == '1' ||
+	all_lines[p->posy + 1][p->posx] == 'E')
 		return ;
 	p->posy++;
 }
@@ -89,7 +98,9 @@ void move_up (t_player *p)
 		ft_draw_elem (p->posx, p->posy - 1, "./blueone.xpm", i);
 		ft_draw_elem (p->posx, p->posy - 1, "./player.xpm", i);
 		ft_draw_elem (p->posx, p->posy, "./blueone.xpm", i);
-		p->coin--;
+		if (all_lines[p->posy - 1][p->posx] == 'C')
+			p->coin--;
+		all_lines[p->posy - 1][p->posx] = '0';
 	}
 	else if (all_lines[p->posy - 1][p->posx] == 'E' && p->coin <= 0)
 	{

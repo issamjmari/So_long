@@ -7,13 +7,15 @@ int next_frame(int key, t_player *p)
 {
 	static int	move;
 
-	if (key == 13)
+	printf ("%d\n", key);
+
+	if (key == 13 || key == 126)
 		move_up (p);
-	if (key == 0)
+	if (key == 0 || key == 123)
 		move_left (p);
-	if (key == 1)
+	if (key == 1 || key == 125)
 		move_down (p);
-	if (key == 2)
+	if (key == 2 || key == 124)
 		move_right (p);
 	move++;
 	return (0);
