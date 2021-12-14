@@ -6,7 +6,6 @@
 int next_frame(int key, t_player *p)
 {
 	static int	move;
-	printf ("%d\n", key);
 
 	if (key == 13)
 		move_up (p);
@@ -50,6 +49,7 @@ t_player	put_elems (char **all_lines, t_img i)
 {
 	t_player	test;
 	y = 0;
+	test.coin = 0;
 	while (all_lines[y])
 	{
 		x = 0;
@@ -60,7 +60,10 @@ t_player	put_elems (char **all_lines, t_img i)
 			else if (all_lines[y][x] == '0')
 				ft_draw_elem (x, y, "./blueone.xpm", i);
 			else if (all_lines[y][x] == 'C')
+			{
 				ft_draw_elem (x, y, "./20.xpm", i);
+				test.coin++;
+			}
 			else if (all_lines[y][x] == 'E')
 				ft_draw_elem (x, y, "./door.xpm", i);
 			else if (all_lines[y][x] == 'P')

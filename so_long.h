@@ -13,6 +13,7 @@ typedef struct s_player
 {
 	int posx;
 	int posy;
+	int coin;
 	t_img i;
 }	t_player;
 int		x;
