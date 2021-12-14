@@ -115,7 +115,4 @@ void	ft_check_wall (char **all_lines, int darr_len, int *width)
 		ft_checkbottom (all_lines[i], darr_len, width);
 		i++;
 	}
-	while (--darr_len)
-		free(all_lines[darr_len]);
-	free(all_lines);
 }

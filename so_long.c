@@ -7,21 +7,11 @@ int next_frame (int key, t_img *i)
 {
 	int		width1;
 	int		height1;
-	if (key == 5)
-		exit (1);
 	if (key == 53)
-		ft_draw_elem (0, 0, ".blueone.xmp", i);
+		exit (1);
 	return (0);
 }
 
-void	ft_draw_elem (int x, int y, void *path, t_img *i)
-{
-	int height;
-	int	width;
-
-	i->img = mlx_xpm_file_to_image(i->mlx, path, &width, &height);
-	mlx_put_image_to_window (i->mlx, i->win, i->img, x * 50, y * 50);
-}
 char	**get_all_lines (int *height, int fd)
 {
 	char	*ret;
@@ -47,18 +37,44 @@ char	**get_all_lines (int *height, int fd)
 	free (temp);
 	return (all_lines);
 }
+
+void	put_elems (char **all_lines, t_img i)
+{
+	y = 0;
+	x = 0;
+	while (all_lines[y])
+	{
+		while (all_lines[y][x])
+		{
+			if (all_lines[y][x] == '1')
+				ft_draw_elem (x, y, "./wall11.xpm", i);
+			else if (all_lines[y][x] == '0')
+				ft_draw_elem (x, y, "./blueone.xpm", i);
+			else if (all_lines[y][x] == 'C')
+				ft_draw_elem (x, y, "./20.xpm", i);
+			else if (all_lines[y][x] == 'E')
+				ft_draw_elem (x, y, "./door.xpm", i);
+			else if (all_lines[y][x] == 'P')
+				ft_draw_elem (x, y, "./player.xpm", i);
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}
 void so_long (int fd)
 {
 	int		width;
 	int		height;
 	char	**all_lines;
-	t_img	*i;
+	t_img	i;
 
 	height = 0;
 	all_lines = get_all_lines (&height, fd);
 	ft_check_wall (all_lines, height, &width);
-	i->mlx = mlx_init();
-	i->win = mlx_new_window(i->mlx, (width * 50), (height * 50), "so long");
-	mlx_key_hook(i->win, next_frame, "something");
-	mlx_loop (i->mlx);
+	i.mlx = mlx_init();
+	i.win = mlx_new_window(i.mlx, (width * 50), (height * 50), "so long");
+	put_elems (all_lines, i);
+	mlx_key_hook(i.win, next_frame, "something");
+	mlx_loop (i.mlx);
 }
