@@ -6,18 +6,30 @@
 int next_frame(int key, t_player *p)
 {
 	static int	move;
+	t_img		i;
 
-	printf ("%d\n", key);
-
+	i = p->i;
 	if (key == 13 || key == 126)
+	{
 		move_up (p);
+		move++;
+	}
 	if (key == 0 || key == 123)
+	{
 		move_left (p);
+		move++;
+	}
 	if (key == 1 || key == 125)
+	{
 		move_down (p);
+		move++;
+	}
 	if (key == 2 || key == 124)
+	{
 		move_right (p);
-	move++;
+		move++;
+	}
+	mlx_string_put(i.mlx, i.win, 10, 10, 0xFF8000, ft_itoa(move));
 	return (0);
 }
 

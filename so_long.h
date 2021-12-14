@@ -22,6 +22,7 @@ char	**all_lines;
 #include <stdlib.h>
 #include <stdio.h>
 #include <mlx.h>
+#include "Libft/libft.h"
 void	ft_check_wall (char **all_lines, int len, int *width);
 void	others_check(int fd, int lines);
 char	*ft_strjoin(char *s1, char *s2);
