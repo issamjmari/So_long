@@ -1,96 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/15 16:09:56 by ijmari            #+#    #+#             */
+/*   Updated: 2021/12/15 20:20:15 by ijmari           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <mlx.h>
 #include "so_long.h"
 #include <unistd.h>
 #include <fcntl.h>
 
-int next_frame(int key, t_player *p)
+int	next_frame(int key, t_player *p)
 {
 	static int	move;
 	t_img		i;
 
 	i = p->i;
+	if (key == 53)
+		exit (1);
 	if (key == 13 || key == 126)
-	{
-		move_up (p);
-		move++;
-	}
+		move_up (p, &move);
 	if (key == 0 || key == 123)
-	{
-		move_left (p);
-		move++;
-	}
+		move_left (p, &move);
 	if (key == 1 || key == 125)
-	{
-		move_down (p);
-		move++;
-	}
+		move_down (p, &move);
 	if (key == 2 || key == 124)
-	{
-		move_right (p);
-		move++;
-	}
-	mlx_string_put(i.mlx, i.win, 10, 10, 0xFF8000, ft_itoa(move));
+		move_right (p, &move);
+	ft_draw_elem (0, 0, "./wall.xpm", i);
+	mlx_string_put(i.mlx, i.win, 10, 10, 0x000000, ft_itoa(move));
 	return (0);
 }
 
-char	**get_all_lines (int *height, int fd)
+int	closee(void)
 {
-	char	*ret;
-	char	*temp;
-	char	**all_lines;
-
-	temp = NULL;
-	ret = get_next_line (fd);
-	while (ret)
-	{
-		(*height)++;
-		if (ret[0] == '\n')
-		{
-			free (ret);
-			printf ("Error\nEmpty line inside the map");
-			exit (1);
-		}
-		temp = ft_strjoin (temp, ret);
-		free (ret);
-		ret = get_next_line (fd);
-	}
-	all_lines = ft_split(temp, '\n');
-	free (temp);
-	return (all_lines);
-}
-
-t_player	put_elems (char **all_lines, t_img i)
-{
-	t_player	test;
-	y = 0;
-	test.coin = 0;
-	while (all_lines[y])
-	{
-		x = 0;
-		while (all_lines[y][x])
-		{
-			if (all_lines[y][x] == '1')
-				ft_draw_elem (x, y, "./wall.xpm", i);
-			else if (all_lines[y][x] == '0')
-				ft_draw_elem (x, y, "./blueone.xpm", i);
-			else if (all_lines[y][x] == 'C')
-			{
-				ft_draw_elem (x, y, "./20.xpm", i);
-				test.coin++;
-			}
-			else if (all_lines[y][x] == 'E')
-				ft_draw_elem (x, y, "./door.xpm", i);
-			else if (all_lines[y][x] == 'P')
-			{
-				ft_draw_elem (x, y, "./player.xpm", i);
-				test.posx = x;
-				test.posy = y;
-			}
-			x++;
-		}
-		y++;
-	}
-	return (test);
+	exit (1);
 }
 
 void so_long (int fd)
@@ -99,14 +47,31 @@ void so_long (int fd)
 	int			height;
 	t_img		i;
 	t_player	p;
+	t_player	test;
 
+	
 	height = 0;
+	test.coin = 0;
 	all_lines = get_all_lines (&height, fd);
 	ft_check_wall (all_lines, height, &width);
 	i.mlx = mlx_init();
 	i.win = mlx_new_window(i.mlx, (width * 50), (height * 50), "so long");
-	p = put_elems (all_lines, i);
+	p = put_elems (all_lines, test, i);
 	p.i = i;
 	mlx_key_hook(i.win, next_frame, &p);
+	mlx_hook(i.win, 17, 0, closee, NULL);
 	mlx_loop (i.mlx);
+}
+
+int	main(int ac, char **av)
+{
+	(void) ac;
+	int fd = open (av[1], O_RDONLY);
+	if (fd == -1)
+	{
+		printf ("Error\nMap not found");
+		exit (1);
+	}
+	so_long (fd);
+	system ("leaks ./so_long");
 }

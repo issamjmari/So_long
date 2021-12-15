@@ -1,115 +1,88 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/15 17:22:43 by ijmari            #+#    #+#             */
+/*   Updated: 2021/12/15 20:42:38 by ijmari           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	ft_draw_elem (int x, int y, void *path, t_img i)
 {
-	int height;
+	int	height;
 	int	width;
 
 	i.img = mlx_xpm_file_to_image(i.mlx, path, &width, &height);
 	mlx_put_image_to_window (i.mlx, i.win, i.img, x * 50, y * 50);
 }
-void move_left (t_player *p)
-{
-	t_img		i;
 
-	i = p->i;
-	if (all_lines[p->posy][p->posx - 1] == 'C' || all_lines[p->posy][p->posx - 1] == 'P'
-	|| all_lines[p->posy][p->posx - 1] == '0')
-	{
-		ft_draw_elem (p->posx - 1, p->posy, "./blueone.xpm", i);
-		ft_draw_elem (p->posx - 1, p->posy, "./player.xpm", i);
-		ft_draw_elem (p->posx, p->posy, "./blueone.xpm", i);
-		if (all_lines[p->posy][p->posx - 1] == 'C')
-			p->coin--;
-		all_lines[p->posy][p->posx - 1] = '0';
-	}
-	else if (all_lines[p->posy][p->posx - 1] == 'E' && p->coin <= 0)
-	{
-		printf ("\033[0;32m");
-		printf ("YOU WON");
-		exit(1);
-	}
-	else if (all_lines[p->posy][p->posx - 1] == '1'
-	|| all_lines[p->posy][p->posx - 1] == 'E')
-		return ;
-	p->posx--;
-}
-void move_right (t_player *p)
+void	wex (char **all_lines, t_img i)
 {
-	t_img		i;
-
-	i = p->i;
-	if (all_lines[p->posy][p->posx + 1] == 'C' || all_lines[p->posy][p->posx + 1] == 'P'
-	|| all_lines[p->posy][p->posx + 1] == '0')
-	{
-		ft_draw_elem (p->posx + 1, p->posy, "./blueone.xpm", i);
-		ft_draw_elem (p->posx + 1, p->posy, "./player.xpm", i);
-		ft_draw_elem (p->posx, p->posy, "./blueone.xpm", i);
-		if (all_lines[p->posy][p->posx + 1] == 'C')
-			p->coin--;
-		all_lines[p->posy][p->posx + 1] = '0';
-	}
-	else if (all_lines[p->posy][p->posx + 1] == 'E' && p->coin <= 0)
-	{
-		printf ("\033[0;32m");
-		printf ("YOU WON");
-		exit(1);
-	}
-	else if (all_lines[p->posy][p->posx + 1] == '1'
-	|| all_lines[p->posy][p->posx + 1] == 'E')
-		return ;
-	p->posx++;
-}
-void move_down (t_player *p)
-{
-	t_img		i;
-
-	i = p->i;
-	if (all_lines[p->posy + 1][p->posx] == 'C' || all_lines[p->posy + 1][p->posx] == 'P'
-	|| all_lines[p->posy + 1][p->posx] == '0')
-	{
-		ft_draw_elem (p->posx, p->posy + 1, "./blueone.xpm", i);
-		ft_draw_elem (p->posx, p->posy + 1, "./player.xpm", i);
-		ft_draw_elem (p->posx, p->posy, "./blueone.xpm", i);
-		if (all_lines[p->posy + 1][p->posx] == 'C')
-			p->coin--;
-		all_lines[p->posy + 1][p->posx] = '0';
-	}
-	else if (all_lines[p->posy + 1][p->posx] == 'E' && p->coin <= 0)
-	{
-		printf ("\033[0;32m");
-		printf ("YOU WON");
-		exit(1);
-	}
-	else if (all_lines[p->posy + 1][p->posx] == '1' ||
-	all_lines[p->posy + 1][p->posx] == 'E')
-		return ;
-	p->posy++;
+	if (all_lines[y][x] == '1')
+		ft_draw_elem (x, y, "./wall.xpm", i);
+	else if (all_lines[y][x] == '0')
+		ft_draw_elem (x, y, "./blueone.xpm", i);
+	else if (all_lines[y][x] == 'E')
+		ft_draw_elem (x, y, "./door.xpm", i);
 }
 
-void move_up (t_player *p)
+t_player	put_elems (char **all_lines, t_player test, t_img i)
 {
-	t_img		i;
+	y = 0;
+	while (all_lines[y])
+	{
+		x = 0;
+		while (all_lines[y][x])
+		{
+			if (all_lines[y][x] == 'C')
+			{
+				ft_draw_elem (x, y, "./blueone.xpm", i);
+				ft_draw_elem (x, y, "./Ninja.xpm", i);
+				test.coin++;
+			}
+			else if (all_lines[y][x] == 'P')
+			{
+				ft_draw_elem (x, y, "./blueone.xpm", i);
+				ft_draw_elem (x, y, "./player.xpm", i);
+				test.posx = x;
+				test.posy = y;
+			}
+			else
+				wex (all_lines, i);
+			x++;
+		}
+		y++;
+	}
+	return (test);
+}
 
-	i = p->i;
-	if (all_lines[p->posy - 1][p->posx] == 'C' || all_lines[p->posy - 1][p->posx] == 'P'
-	|| all_lines[p->posy - 1][p->posx] == '0')
+char	**get_all_lines (int *height, int fd)
+{
+	char	*ret;
+	char	*temp;
+	char	**all_lines;
+
+	temp = NULL;
+	ret = get_next_line (fd);
+	while (ret)
 	{
-		ft_draw_elem (p->posx, p->posy - 1, "./blueone.xpm", i);
-		ft_draw_elem (p->posx, p->posy - 1, "./player.xpm", i);
-		ft_draw_elem (p->posx, p->posy, "./blueone.xpm", i);
-		if (all_lines[p->posy - 1][p->posx] == 'C')
-			p->coin--;
-		all_lines[p->posy - 1][p->posx] = '0';
+		(*height)++;
+		if (ret[0] == '\n')
+		{
+			free (ret);
+			printf ("Error\nEmpty line inside the map");
+			exit (1);
+		}
+		temp = ft_strjoin (temp, ret);
+		free (ret);
+		ret = get_next_line (fd);
 	}
-	else if (all_lines[p->posy - 1][p->posx] == 'E' && p->coin <= 0)
-	{
-		printf ("\033[0;32m");
-		printf ("YOU WON");
-		exit(1);
-	}
-	else if (all_lines[p->posy - 1][p->posx] == '1'
-	|| all_lines[p->posy - 1][p->posx] == 'E')
-		return ;
-	p->posy--;
+	all_lines = ft_split(temp, '\n');
+	free (temp);
+	return (all_lines);
 }
