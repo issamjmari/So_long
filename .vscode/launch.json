@@ -8,7 +8,7 @@
 			"type": "lldb",
 			"request": "launch",
 			"name": "Debug",
-			"program": "/Users/ijmari/Desktop/so_long/a.out",
+			"program": "/Users/ijmari/Desktop/so_long/so_long",
 			"args": [],
 			"cwd": "${workspaceFolder}"
 		}

@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_check_wall.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/16 11:51:20 by ijmari            #+#    #+#             */
+/*   Updated: 2021/12/16 18:10:08 by ijmari           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include "so_long.h"
-#include "Libft/libft.h"
 
-void	check_cases (int coin, int ex, int player)
+void	check_cases(int coin, int ex, int player)
 {
 	if (coin == 0)
 	{
@@ -21,7 +32,7 @@ void	check_cases (int coin, int ex, int player)
 	}
 }
 
-void	count_cases (int arr_len, char *ret, int darr_len, int i)
+void	count_cases(int arr_len, char *ret, int darr_len, int i)
 {
 	static int	line_num;
 	static int	coin;
@@ -37,7 +48,7 @@ void	count_cases (int arr_len, char *ret, int darr_len, int i)
 		else if (ret[i] == 'P')
 			player++;
 		else if (ret[i] != 'C' && ret[i] != 'E' && ret[i] != '0'
-		&& ret[i] != 'P' && ret[i] != '1')
+			&& ret[i] != 'P' && ret[i] != '1' && ret[i] != 'Y')
 		{
 			printf ("Error\nUnknown char in map");
 			exit (1);
@@ -49,9 +60,9 @@ void	count_cases (int arr_len, char *ret, int darr_len, int i)
 	line_num++;
 }
 
-void ft_checkbottom(char *curr, int darr_len, int *width)
+void	ft_checkbottom(char *curr, int darr_len, int *width)
 {
-	int 		i;
+	int			i;
 	static int	arr_len;
 	static int	stock_len;
 
@@ -77,7 +88,7 @@ void ft_checkbottom(char *curr, int darr_len, int *width)
 	count_cases (arr_len, curr, darr_len, i);
 }
 
-void	ft_check_fll (char *first, char *last)
+void	ft_check_fll(char *first, char *last)
 {
 	int	i;
 	int	j;
@@ -96,15 +107,15 @@ void	ft_check_fll (char *first, char *last)
 	i = 0;
 	while (first[i] == '1' && last[i] == '1')
 		i++;
-	if ((first[i] != '\n' && first[i] != '\0') 
-	|| (last[i] != '\n' && last[i] != '\0'))
+	if ((first[i] != '\n' && first[i] != '\0')
+		|| (last[i] != '\n' && last[i] != '\0'))
 	{
 		printf ("Error\nWall Incomplete");
 		exit (1);
 	}
 }
 
-void	ft_check_wall (char **all_lines, int darr_len, int *width)
+void	ft_check_wall(char **all_lines, int darr_len, int *width)
 {
 	int		i;
 

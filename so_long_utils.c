@@ -6,13 +6,13 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:22:43 by ijmari            #+#    #+#             */
-/*   Updated: 2021/12/15 20:46:10 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/16 18:08:57 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_draw_elem (int x, int y, void *path, t_img i)
+void	ft_draw_elem(int x, int y, void *path, t_img i)
 {
 	int	height;
 	int	width;
@@ -21,7 +21,7 @@ void	ft_draw_elem (int x, int y, void *path, t_img i)
 	mlx_put_image_to_window (i.mlx, i.win, i.img, x * 50, y * 50);
 }
 
-t_player	wepx (char **all_lines, t_img i, t_player test)
+t_player	wepx(char **all_lines, t_img i, t_player test)
 {
 	if (all_lines[y][x] == '1')
 		ft_draw_elem (x, y, "./wall.xpm", i);
@@ -39,7 +39,7 @@ t_player	wepx (char **all_lines, t_img i, t_player test)
 	return (test);
 }
 
-t_player	put_elems (char **all_lines, t_player test, t_img i)
+t_player	put_elems(char **all_lines, t_player test, t_img i)
 {
 	y = 0;
 	while (all_lines[y])
@@ -53,6 +53,11 @@ t_player	put_elems (char **all_lines, t_player test, t_img i)
 				ft_draw_elem (x, y, "./Ninja.xpm", i);
 				test.coin++;
 			}
+			else if (all_lines[y][x] == 'Y')
+			{
+				ft_draw_elem (x, y, "./blueone.xpm", i);
+				ft_draw_elem (x, y, "./bomb.xpm", i);
+			}
 			else
 				test = wepx (all_lines, i, test);
 			x++;
@@ -62,7 +67,7 @@ t_player	put_elems (char **all_lines, t_player test, t_img i)
 	return (test);
 }
 
-char	**get_all_lines (int *height, int fd)
+char	**get_all_lines(int *height, int fd)
 {
 	char	*ret;
 	char	*temp;

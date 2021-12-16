@@ -6,12 +6,16 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:48:35 by ijmari            #+#    #+#             */
-/*   Updated: 2021/12/15 20:34:35 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/16 18:12:32 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 #define SO_LONG_H
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <mlx.h>
 typedef struct s_img
 {
 	char	*relative_path;
@@ -21,6 +25,7 @@ typedef struct s_img
 	void	*img;
 	void	*win;
 }	t_img;
+
 typedef struct s_player
 {
 	int 	posx;
@@ -28,21 +33,21 @@ typedef struct s_player
 	int 	coin;
 	t_img i;
 }	t_player;
+
 typedef struct s_wall
 {
 	int 	posx;
 	int 	posy;
 }	t_wall;
+
 int		x;
 int		y;
 char	**all_lines;
-#include <stdlib.h>
-#include <stdio.h>
-#include <mlx.h>
-#include "Libft/libft.h"
+size_t 	ft_strlen(const char *s);
+char    *ft_strjoin(char *s1, char *s2);
+char    *ft_itoa(int n);
 void	ft_check_wall (char **all_lines, int len, int *width);
 void	others_check(int fd, int lines);
-char	*ft_strjoin(char *s1, char *s2);
 char    **ft_split(char const *s, char c);
 char	**get_all_lines (int *len, int fd);
 char	*get_next_line(int fd);
