@@ -6,11 +6,11 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:49:20 by ijmari            #+#    #+#             */
-/*   Updated: 2021/11/11 16:01:13 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/17 14:36:54 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
 static int	ft_size(int n)
 {

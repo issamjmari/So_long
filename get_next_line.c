@@ -6,11 +6,11 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:47:01 by ijmari            #+#    #+#             */
-/*   Updated: 2021/11/20 17:03:23 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/17 14:37:08 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "so_long.h"
 
 int	there_isn(char *s)
 {

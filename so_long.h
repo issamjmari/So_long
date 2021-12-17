@@ -6,16 +6,19 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:48:35 by ijmari            #+#    #+#             */
-/*   Updated: 2021/12/16 18:12:32 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/17 15:11:39 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
-#define SO_LONG_H
+# define SO_LONG_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <mlx.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <mlx.h>
+# include <unistd.h>
+# define BUFFER_SIZE 10
+
 typedef struct s_img
 {
 	char	*relative_path;
@@ -28,35 +31,35 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	int 	posx;
-	int 	posy;
-	int 	coin;
-	t_img i;
+	int		posx;
+	int		posy;
+	int		coin;
+	t_img	i;
 }	t_player;
 
 typedef struct s_wall
 {
-	int 	posx;
-	int 	posy;
+	int		posx;
+	int		posy;
 }	t_wall;
 
-int		x;
-int		y;
-char	**all_lines;
-size_t 	ft_strlen(const char *s);
-char    *ft_strjoin(char *s1, char *s2);
-char    *ft_itoa(int n);
-void	ft_check_wall (char **all_lines, int len, int *width);
-void	others_check(int fd, int lines);
-char    **ft_split(char const *s, char c);
-char	**get_all_lines (int *len, int fd);
-char	*get_next_line(int fd);
-void	so_long (int fd);
-void	ft_draw_elem (int x, int y, void *path, t_img i);
-t_player put_elems (char **all_lines, t_player test, t_img i);
-void move_up (t_player *p, int *move);
-void move_down (t_player *p, int *move);
-void move_left (t_player *p, int *move);
-void move_right (t_player *p, int *move);
-#define BUFFER_SIZE 10
+int			g_x;
+int			g_y;
+char		**g_all_lines;
+size_t		ft_strlen(const char *s);
+char		*ft_strjoin(char *s1, char *s2);
+char		*ft_itoa(int n);
+void		ft_check_wall(char **all_lines, int len, int *width);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
+void		others_check(int fd, int lines);
+char		**ft_split(char const *s, char c);
+char		**get_all_lines(int *len, int fd);
+char		*get_next_line(int fd);
+void		so_long(int fd);
+void		ft_draw_elem(int x, int y, void *path, t_img i);
+t_player	put_elems(char **all_lines, t_player test, t_img i);
+void		move_up(t_player *p, int *move);
+void		move_down(t_player *p, int *move);
+void		move_left(t_player *p, int *move);
+void		move_right(t_player *p, int *move);
 #endif

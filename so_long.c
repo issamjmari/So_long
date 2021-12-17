@@ -6,7 +6,7 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 16:09:56 by ijmari            #+#    #+#             */
-/*   Updated: 2021/12/16 18:10:31 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/17 15:42:16 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	next_frame(int key, t_player *p)
 	move_s = ft_itoa(move);
 	mlx_string_put(i.mlx, i.win, 10, 10, 0x000000, move_s);
 	free (move_s);
-	system ("leaks so_long");
 	return (0);
 }
 
@@ -55,11 +54,11 @@ void	so_long(int fd)
 
 	height = 0;
 	test.coin = 0;
-	all_lines = get_all_lines (&height, fd);
-	ft_check_wall (all_lines, height, &width);
+	g_all_lines = get_all_lines (&height, fd);
+	ft_check_wall (g_all_lines, height, &width);
 	i.mlx = mlx_init();
 	i.win = mlx_new_window(i.mlx, (width * 50), (height * 50), "so long");
-	p = put_elems (all_lines, test, i);
+	p = put_elems (g_all_lines, test, i);
 	p.i = i;
 	mlx_key_hook(i.win, next_frame, &p);
 	mlx_hook(i.win, 17, 0, closee, NULL);
