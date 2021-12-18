@@ -6,7 +6,7 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:48:35 by ijmari            #+#    #+#             */
-/*   Updated: 2021/12/18 12:05:04 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/18 12:50:12 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ typedef struct s_wall
 int			g_x;
 int			g_y;
 char		**g_all_lines;
-int	ft_strncmp(char *s1, char *s2, unsigned int n);
+int			ft_strncmp(char *s1, char *s2, unsigned int n);
 size_t		ft_strlen(const char *s);
-char    	*ft_strrchr(char *s, int c);
+char		*ft_strrchr(char *s, int c);
 int			ft_memcmp(void *s1, void *s2, size_t n);
 char		*ft_strjoin(char *s1, char *s2);
 char		*ft_itoa(int n);

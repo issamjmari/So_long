@@ -6,7 +6,7 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:22:43 by ijmari            #+#    #+#             */
-/*   Updated: 2021/12/17 15:19:57 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/18 13:22:45 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,16 @@ t_player	put_elems(char **all_lines, t_player test, t_img i)
 	return (test);
 }
 
-char	**get_all_lines(int *height, int fd)
+char	*needed(int fd, int *height, char *temp)
 {
 	char	*ret;
-	char	*temp;
-	char	**all_lines;
 
-	temp = NULL;
 	ret = get_next_line (fd);
+	if (!ret)
+	{
+		printf ("Error\nFile empty");
+		exit (1);
+	}
 	while (ret)
 	{
 		(*height)++;
@@ -88,6 +90,16 @@ char	**get_all_lines(int *height, int fd)
 		free (ret);
 		ret = get_next_line (fd);
 	}
+	return (temp);
+}
+
+char	**get_all_lines(int *height, int fd)
+{
+	char	*temp;
+	char	**all_lines;
+
+	temp = NULL;
+	temp = needed (fd, height, temp);
 	all_lines = ft_split(temp, '\n');
 	free (temp);
 	return (all_lines);

@@ -6,7 +6,7 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 16:09:56 by ijmari            #+#    #+#             */
-/*   Updated: 2021/12/18 11:52:37 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/18 12:50:47 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ int	next_frame(int key, t_player *p)
 
 	i = p->i;
 	if (key == 53)
-	{
-		system ("leaks so_long");
-		exit (1);
-	}
 		exit (1);
 	if (key == 13 || key == 126)
 		move_up (p, &move);
@@ -67,4 +63,23 @@ void	so_long(int fd)
 	mlx_key_hook(i.win, next_frame, &p);
 	mlx_hook(i.win, 17, 0, closee, NULL);
 	mlx_loop (i.mlx);
+}
+
+int	main(int ac, char **av)
+{
+	int	fd;
+
+	if (ft_strncmp(ft_strrchr(av[1], '.'), ".ber", 4) != 0)
+	{
+		printf ("Error\nMap extension is not .ber");
+		exit (1);
+	}
+	fd = open (av[1], O_RDONLY);
+	if (fd == -1 || ac > 2)
+	{
+		printf ("Error\nMap not found");
+		exit (1);
+	}
+	so_long (fd);
+	close (fd);
 }
