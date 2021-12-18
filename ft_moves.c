@@ -6,7 +6,7 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:58:42 by ijmari            #+#    #+#             */
-/*   Updated: 2021/12/18 10:58:03 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/18 15:00:04 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	move_right(t_player *p, int *move)
 			p->coin--;
 		g_all_lines[p->posy][p->posx + 1] = '0';
 	}
-	else if (g_all_lines[p->posy][p->posx - 1] == 'E' && p->coin <= 0)
+	else if (g_all_lines[p->posy][p->posx + 1] == 'E' && p->coin <= 0)
 		bombandexit ('E', move, g_all_lines);
 	else if (g_all_lines[p->posy][p->posx + 1] == '1'
 	|| g_all_lines[p->posy][p->posx + 1] == 'E')
@@ -106,7 +106,7 @@ void	move_down(t_player *p, int *move)
 			p->coin--;
 		g_all_lines[p->posy + 1][p->posx] = '0';
 	}
-	else if (g_all_lines[p->posy][p->posx - 1] == 'E' && p->coin <= 0)
+	else if (g_all_lines[p->posy + 1][p->posx] == 'E' && p->coin <= 0)
 		bombandexit ('E', move, g_all_lines);
 	else if (g_all_lines[p->posy + 1][p->posx] == '1' ||
 	g_all_lines[p->posy + 1][p->posx] == 'E')
@@ -133,7 +133,7 @@ void	move_up(t_player *p, int *move)
 			p->coin--;
 		g_all_lines[p->posy - 1][p->posx] = '0';
 	}
-	else if (g_all_lines[p->posy][p->posx - 1] == 'E' && p->coin <= 0)
+	else if (g_all_lines[p->posy - 1][p->posx] == 'E' && p->coin <= 0)
 		bombandexit ('E', move, g_all_lines);
 	else if (g_all_lines[p->posy - 1][p->posx] == '1'
 	|| g_all_lines[p->posy - 1][p->posx] == 'E')
