@@ -6,7 +6,7 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:58:42 by ijmari            #+#    #+#             */
-/*   Updated: 2021/12/17 15:15:08 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/18 10:58:03 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	bombandexit(char c, int *move, char **all_lines)
 	int	len;
 
 	len = 0;
-	(void) all_lines;
 	while (all_lines[len])
 		len++;
 	while (--len)
@@ -30,7 +29,7 @@ void	bombandexit(char c, int *move, char **all_lines)
 	}
 	if (c == 'Y')
 	{
-		printf ("\033[0;31mYOU'VE GET KILLED SIR");
+		printf ("\033[0;31mYOU LOSE SIR");
 		exit (1);
 	}
 }
