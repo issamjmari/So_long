@@ -6,7 +6,7 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 16:09:56 by ijmari            #+#    #+#             */
-/*   Updated: 2021/12/18 12:50:47 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/18 17:34:04 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	next_frame(int key, t_player *p)
 		move_right (p, &move);
 	ft_draw_elem (0, 0, "./wall.xpm", i);
 	move_s = ft_itoa(move);
-	mlx_string_put(i.mlx, i.win, 10, 10, 0x000000, move_s);
+	mlx_string_put(i.mlx, i.win, 10, 10, 000000, move_s);
 	free (move_s);
 	return (0);
 }
@@ -61,7 +61,7 @@ void	so_long(int fd)
 	p = put_elems (g_all_lines, test, i);
 	p.i = i;
 	mlx_key_hook(i.win, next_frame, &p);
-	mlx_hook(i.win, 17, 0, closee, NULL);
+	mlx_hook(i.win, 17, (1L<<15), closee, NULL);
 	mlx_loop (i.mlx);
 }
 
@@ -77,7 +77,7 @@ int	main(int ac, char **av)
 	fd = open (av[1], O_RDONLY);
 	if (fd == -1 || ac > 2)
 	{
-		printf ("Error\nMap not found");
+		printf ("Error\nMap Invalid");
 		exit (1);
 	}
 	so_long (fd);

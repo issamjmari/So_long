@@ -6,7 +6,7 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:48:35 by ijmari            #+#    #+#             */
-/*   Updated: 2021/12/18 12:50:12 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/18 17:19:35 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ typedef struct s_player
 	int		coin;
 	t_img	i;
 }	t_player;
-
-typedef struct s_wall
-{
-	int		posx;
-	int		posy;
-}	t_wall;
 
 int			g_x;
 int			g_y;

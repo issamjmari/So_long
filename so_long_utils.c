@@ -6,7 +6,7 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:22:43 by ijmari            #+#    #+#             */
-/*   Updated: 2021/12/18 13:22:45 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/18 17:14:37 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_draw_elem(int x, int y, void *path, t_img i)
 	mlx_put_image_to_window (i.mlx, i.win, i.img, x * 50, y * 50);
 }
 
-t_player	wepx(char **all_lines, t_img i, t_player test)
+t_player	webp(char **all_lines, t_img i, t_player test)
 {
 	if (all_lines[g_y][g_x] == '1')
 		ft_draw_elem (g_x, g_y, "./wall.xpm", i);
@@ -59,7 +59,7 @@ t_player	put_elems(char **all_lines, t_player test, t_img i)
 				ft_draw_elem (g_x, g_y, "./bomb.xpm", i);
 			}
 			else
-				test = wepx (all_lines, i, test);
+				test = webp (all_lines, i, test);
 			g_x++;
 		}
 		g_y++;

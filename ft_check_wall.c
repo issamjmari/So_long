@@ -6,7 +6,7 @@
 /*   By: ijmari <ijmari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 11:51:20 by ijmari            #+#    #+#             */
-/*   Updated: 2021/12/16 18:10:08 by ijmari           ###   ########.fr       */
+/*   Updated: 2021/12/18 17:07:53 by ijmari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	count_cases(int arr_len, char *ret, int darr_len, int i)
 	static int	ex;
 	static int	player;
 
-	while (i < arr_len - 1)
+	while (i < arr_len)
 	{
 		if (ret[i] == 'C')
 			coin++;

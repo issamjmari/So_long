@@ -6,7 +6,6 @@ all : $(NAME)
 $(NAME) :
 	$(CC) $(CFLAGS) $(SRC) -o $(NAME)
 clean :
-
 fclean :
 	rm -f $(NAME)
 re : fclean all
